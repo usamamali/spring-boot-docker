@@ -3,21 +3,21 @@
 # Check https://circleci.com/docs/2.0/language-java/ for more details
 #
 version: 2
-  jobs:
-    deploy-job:
+jobs:
+  deploy-job:
       steps:
         - add_ssh_keys:
             fingerprints:
               - "ec:f0:9c:d6:76:a5:5a:f6:6f:0d:e3:84:c1:aa:d0:9a"
-    build:
-      docker:
-        # specify the version you desire here
-        - image: circleci/openjdk:8-jdk
-        
-        # Specify service dependencies here if necessary
-        # CircleCI maintains a library of pre-built images
-        # documented at https://circleci.com/docs/2.0/circleci-images/
-        # - image: circleci/postgres:9.4
+  build:
+    docker:
+      # specify the version you desire here
+      - image: circleci/openjdk:8-jdk
+      
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      # - image: circleci/postgres:9.4
 
     working_directory: ~/spring-boot-docker
 
@@ -44,5 +44,3 @@ version: 2
         
       # run tests!
       - run: mvn test
-
-
