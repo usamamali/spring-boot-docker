@@ -3,7 +3,12 @@
 # Check https://circleci.com/docs/2.0/language-java/ for more details
 #
 version: 2
-jobs:
+ jobs:
+  deploy-job:
+   steps:
+     - add_ssh_keys:
+         fingerprints:
+           - "ec:f0:9c:d6:76:a5:5a:f6:6f:0d:e3:84:c1:aa:d0:9a"
   build:
     docker:
       # specify the version you desire here
