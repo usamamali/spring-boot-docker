@@ -13,7 +13,6 @@ jobs:
       enabled: true
   build:
     docker:
-      enabled: true
       # specify the version you desire here
       - image: circleci/openjdk:8-jdk
       
