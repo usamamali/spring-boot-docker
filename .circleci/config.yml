@@ -4,13 +4,6 @@
 #
 version: 2
 jobs:
-  deploy-job:
-    machine:
-      - enabled: true
-    steps:
-      - add_ssh_keys:
-          fingerprints:
-            - "ec:f0:9c:d6:76:a5:5a:f6:6f:0d:e3:84:c1:aa:d0:9a"
   build:
     docker:
       #- enabled: true
