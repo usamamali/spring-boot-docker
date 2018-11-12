@@ -44,6 +44,7 @@ jobs:
       - deploy:
           name: Push app to Docker Hub
           command: |
+            docker images
             docker login -u $DOCKER_HUB_USER_ID -p $DOCKER_HUB_PWD
             docker tag hellospringwithdocker_hello-sprint-boot-docker $DOCKER_HUB_USER_ID/hellospringwithdocker:$CIRCLE_SHA1
             docker tag hellospringwithdocker_hello-sprint-boot-docker $DOCKER_HUB_USER_ID/hellospringwithdocker:latest
