@@ -5,7 +5,7 @@
 version: 2
 jobs:
   deploy-job:
-    docker:
+    machine:
       - enabled: true
     steps:
       - add_ssh_keys:
