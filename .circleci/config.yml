@@ -4,11 +4,6 @@
 #
 version: 2
 jobs:
-  deploy-job:
-      steps:
-        - add_ssh_keys:
-            fingerprints:
-              - "ec:f0:9c:d6:76:a5:5a:f6:6f:0d:e3:84:c1:aa:d0:9a"
   build:
     docker:
       # specify the version you desire here
@@ -44,3 +39,8 @@ jobs:
         
       # run tests!
       - run: mvn test
+  deploy-job:
+      steps:
+        - add_ssh_keys:
+            fingerprints:
+              - "ec:f0:9c:d6:76:a5:5a:f6:6f:0d:e3:84:c1:aa:d0:9a"
