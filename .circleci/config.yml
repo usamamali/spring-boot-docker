@@ -13,7 +13,7 @@ jobs:
             - "ec:f0:9c:d6:76:a5:5a:f6:6f:0d:e3:84:c1:aa:d0:9a"
   build:
     docker:
-      - enabled: true
+      #- enabled: true
       # specify the version you desire here
       - image: circleci/openjdk:8-jdk
       
