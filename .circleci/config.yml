@@ -6,7 +6,6 @@ version: 2
 jobs:
   build:
     docker:
-      #- enabled: true
       # specify the version you desire here
        - image: circleci/openjdk:8u171-jdk
       #- image: circleci/openjdk:8-jdk
@@ -36,13 +35,15 @@ jobs:
       - run: mvn dependency:go-offline
 
        # run tests!
-      - run: ./mvnw -e clean test
+      - run: 
+        name: Test Application
+        command: ./mvnw -e clean test
 
       - setup_remote_docker
 
       - run:
-          name: Build App
-          command: ./mvnw -DskipTests package
+          name: Build App Package
+          command: ./mvnw -DskipTests clean package
 
       - run:
           name: Build Docker Image
@@ -59,8 +60,6 @@ jobs:
           paths:
             - ~/.m2
           key: v1-dependencies-{{ checksum "pom.xml" }}
-
-      #- setup_remote_docker
 
       - deploy:
           name: Push app to Docker Hub
