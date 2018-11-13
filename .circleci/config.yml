@@ -32,7 +32,9 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
-      - run: mvn dependency:go-offline
+      - run: 
+          name: Maven Dependency Go Offline
+          command: mvn dependency:go-offline
 
        # run tests!
       - run: 
