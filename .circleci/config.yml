@@ -52,12 +52,14 @@ jobs:
           command: |
             echo 'export ECR_REPOSITORY_NAME="${AWS_RESOURCE_NAME_PREFIX}"' >> $BASH_ENV
             echo 'export FULL_IMAGE_NAME="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${ECR_REPOSITORY_NAME}:${CIRCLE_SHA1}"' >> $BASH_ENV
-        
+      
+        # create image using docker build directly
       - run:
           name: Build Image AWS
           command: |
             docker build -t $FULL_IMAGE_NAME .
 
+        # create image using maven
       - run:
           name: Build Docker Image
           command: ./mvnw dockerfile:build
@@ -67,8 +69,19 @@ jobs:
           command: |
             docker run -d --name built-image $FULL_IMAGE_NAME
             sleep 15
-            docker run --network container:built-image appropriate/curl --retry 10 --retry-connrefused http://localhost:9090/healthcheck/
+            docker run --network container:built-image appropriate/curl --retry 10 --retry-connrefused http://localhost:9090/healthcheck/ | grep "I am alive"
 
+      - run:
+          name: Save image to an archive
+          command: |
+            mkdir docker-image
+            docker save -o docker-image/image.tar $FULL_IMAGE_NAME
+
+      - persist_to_workspace:
+          root: .
+          paths:
+            - docker-image
+            
       #- run:
        #   name: Test Docker Image
         #  command: |
