@@ -57,6 +57,8 @@ jobs:
           name: Build image AWS
           command: |
             docker build -t $FULL_IMAGE_NAME .
+            docker images
+            docker history $FULL_IMAGE_NAME
 
       - run:
           name: Test image
