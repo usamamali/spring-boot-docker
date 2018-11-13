@@ -36,11 +36,11 @@ jobs:
        # run tests!
       - run: ./mvnw -e clean test
 
-     # - run:
-      #    name: Build Docker Image
-       #   command: ./mvnw dockerfile:build
-
       - setup_remote_docker
+
+      - run:
+          name: Build Docker Image
+          command: ./mvnw dockerfile:build
 
       - save_cache:
           paths:
