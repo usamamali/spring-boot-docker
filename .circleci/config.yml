@@ -38,11 +38,11 @@ jobs:
        # run tests!
       - run: ./mvnw -e clean test
 
+      - setup_remote_docker
+
       - run:
           name: Build App
-          command: ./mvnw package dockerfile:build
-
-      - setup_remote_docker
+          command: ./mvnw -DskipTests package dockerfile:build
 
       #- run:
        #   name: Build Docker Image
