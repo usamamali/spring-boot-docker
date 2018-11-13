@@ -58,14 +58,6 @@ jobs:
           command: |
             docker build -t $FULL_IMAGE_NAME .
             docker images
-            docker history $FULL_IMAGE_NAME
-
-      - run:
-          name: Test image
-          command: |
-            docker run -d -p 8888:9090 --name built-image $FULL_IMAGE_NAME
-            sleep 15
-            docker run --network container:built-image appropriate/curl --retry 10 --retry-connrefused http://localhost:8888/healthcheck/
 
       - run:
           name: Build Docker Image
@@ -77,6 +69,14 @@ jobs:
             docker run -d -p 9090:9090 --name built-image usamamali/hello-spring-boot-docker
             sleep 15
             docker run --network container:built-image appropriate/curl --retry 10 --retry-connrefused http://localhost:9090/healthcheck/ | grep "I am alive"
+
+      - run:
+          name: Test image
+          command: |
+            docker run -d -p 9090:9090 --name built-image $FULL_IMAGE_NAME
+            sleep 15
+            docker run --network container:built-image appropriate/curl --retry 10 --retry-connrefused http://localhost:8888/healthcheck/
+
 
       - save_cache:
           paths:
