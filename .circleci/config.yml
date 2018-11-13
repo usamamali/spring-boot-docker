@@ -36,8 +36,8 @@ jobs:
 
        # run tests!
       - run: 
-        name: Test Application
-        command: ./mvnw -e clean test
+          name: Test Application
+          command: ./mvnw -e clean test
 
       - setup_remote_docker
 
@@ -54,7 +54,7 @@ jobs:
           command: |
             docker run -d -p 9090:9090 --name built-image usamamali/hello-spring-boot-docker
             sleep 10
-            docker run --network container:built-image appropriate/curl --retry 10 --retry-connrefused http://localhost:9090 | grep "Hello Docker World using CI"
+            docker run --network container:built-image appropriate/curl --retry 10 --retry-connrefused http://localhost:9090 | grep "Hello Docker World using C"
 
       - save_cache:
           paths:
