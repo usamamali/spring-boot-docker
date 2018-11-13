@@ -62,8 +62,8 @@ jobs:
           name: Test image
           command: |
             docker run -d -p 8888:9090 --name built-image $FULL_IMAGE_NAME
-            sleep 60
-            docker run --network container:built-image appropriate/curl --retry 10 --retry-connrefused http://localhost:8888/healthcheck | grep "I am alive"
+            sleep 15
+            docker run --network container:built-image appropriate/curl --retry 10 --retry-connrefused http://localhost:8888/healthcheck/
 
       - run:
           name: Build Docker Image
