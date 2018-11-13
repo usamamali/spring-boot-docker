@@ -35,7 +35,7 @@ public class HelloRestContollerTest {
 
 	// given(helloRestController.home()).willReturn("Hello Docker World");
 
-	logger.log(Level.INFO, "Inside testing Ibrahim");
+	logger.log(Level.INFO, "Inside testing ...");
 
 	mvc.perform(get("/").contentType(MediaType.TEXT_PLAIN)).andExpect(status().isOk());
 
