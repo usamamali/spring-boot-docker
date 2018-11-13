@@ -61,6 +61,6 @@ jobs:
             docker --version
             docker images
             docker login -u $DOCKER_HUB_USER_ID -p $DOCKER_HUB_PWD
-            docker tag hellospringwithdocker_hello-sprint-boot-docker $DOCKER_HUB_USER_ID/hellospringwithdocker:$CIRCLE_SHA1
-            docker tag hellospringwithdocker_hello-sprint-boot-docker $DOCKER_HUB_USER_ID/hellospringwithdocker:latest
-            #docker push $DOCKER_HUB_USR_ID/hellospringwithdocker:$CIRCLE_SHA1
+            docker tag usamamali/hello-spring-boot-docker $DOCKER_HUB_USER_ID/hello-spring-boot-docker:$CIRCLE_SHA1
+            docker tag usamamali/hello-spring-boot-docker $DOCKER_HUB_USER_ID/hello-spring-boot-docker:latest
+            docker push $DOCKER_HUB_USR_ID/usamamali/hello-spring-boot-docker:$CIRCLE_SHA1
