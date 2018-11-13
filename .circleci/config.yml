@@ -57,8 +57,6 @@ jobs:
           name: Build image AWS
           command: |
             docker build -t $FULL_IMAGE_NAME .
-            docker run -it $FULL_IMAGE_NAME sh 
-            ls
 
       - run:
           name: Build Docker Image
@@ -67,14 +65,14 @@ jobs:
       - run:
           name: Test Docker Image
           command: |
-            docker run -d -p 9090:9090 --name built-image usamamali/hello-spring-boot-docker
+            docker run -d -p 9990:9090 --name built-image usamamali/hello-spring-boot-docker
             sleep 15
-            docker run --network container:built-image appropriate/curl --retry 10 --retry-connrefused http://localhost:9090/healthcheck/ | grep "I am alive"
+            docker run --network container:built-image appropriate/curl --retry 10 --retry-connrefused http://localhost:9990/healthcheck/ | grep "I am alive"
 
       - run:
           name: Test image
           command: |
-            docker run -d -p 9099:9090 --name built-image1 $FULL_IMAGE_NAME
+            docker run -d --name built-image1 $FULL_IMAGE_NAME
             sleep 15
             docker run --network container:built-image1 appropriate/curl --retry 10 --retry-connrefused http://localhost:9099/healthcheck/
 
