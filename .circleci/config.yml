@@ -47,7 +47,7 @@ jobs:
       - run:
           name: Build Docker Image
           command: |
-            docker build
+            docker build -t hello-spring-boot-docker
 
       - save_cache:
           paths:
