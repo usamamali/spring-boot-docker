@@ -6,6 +6,9 @@ package com.service.hello.controller;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +25,8 @@ import org.springframework.test.web.servlet.MockMvc;
 @WebMvcTest(HelloRestController.class)
 public class HelloRestContollerTest {
 
+    Logger logger = Logger.getLogger("Test Logger");
+
     @Autowired
     private MockMvc mvc;
 
@@ -29,6 +34,8 @@ public class HelloRestContollerTest {
     public void givenHelloService_whenHome_thenReturnWelcomeMsg() throws Exception {
 
 	// given(helloRestController.home()).willReturn("Hello Docker World");
+
+	logger.log(Level.INFO, "Inside testing");
 
 	mvc.perform(get("/").contentType(MediaType.TEXT_PLAIN)).andExpect(status().isOk());
 

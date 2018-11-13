@@ -23,7 +23,6 @@ jobs:
     
     steps:
       - checkout
-      - setup_remote_docker
 
       # Download and cache dependencies
       - restore_cache:
@@ -34,13 +33,19 @@ jobs:
 
       - run: mvn dependency:go-offline
 
+       # run tests!
+      - run: ./mvnw clean test
+
+      - run:
+          name: Build Docker Image
+          command: ./mvnw dockerfile:build
+
       - save_cache:
           paths:
             - ~/.m2
           key: v1-dependencies-{{ checksum "pom.xml" }}
-        
-      # run tests!
-      #- run: ./mvnw test
+
+      #- setup_remote_docker
 
       - deploy:
           name: Push app to Docker Hub
