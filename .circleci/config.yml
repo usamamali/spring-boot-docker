@@ -23,6 +23,8 @@ jobs:
       MAVEN_OPTS: -Xmx3200m
     
     steps:
+      - run:
+          name: Test image
       - checkout
 
       # Download and cache dependencies
@@ -46,6 +48,24 @@ jobs:
       - run:
           name: Build App Package
           command: ./mvnw -DskipTests clean package
+
+      - run:
+          name: Set convenience environment variables
+          command: |
+            echo 'export ECR_REPOSITORY_NAME="${AWS_RESOURCE_NAME_PREFIX}"' >> $BASH_ENV
+            echo 'export FULL_IMAGE_NAME="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${ECR_REPOSITORY_NAME}:${CIRCLE_SHA1}"' >> $BASH_ENV
+        
+      - run:
+          name: Build image AWS
+          command: |
+            docker build -t $FULL_IMAGE_NAME .
+
+      - run:
+          name: Test image
+          command: |
+            docker run -d -p 8888:9090 --name built-image $FULL_IMAGE_NAME
+            sleep 15
+            docker run --network container:built-image appropriate/curl --retry 10 --retry-connrefused http://localhost:8888/healthcheck | grep "I am alive"
 
       - run:
           name: Build Docker Image
