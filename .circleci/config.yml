@@ -54,7 +54,7 @@ jobs:
             echo 'export FULL_IMAGE_NAME="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${ECR_REPOSITORY_NAME}:${CIRCLE_SHA1}"' >> $BASH_ENV
         
       - run:
-          name: Build image AWS
+          name: Build Image AWS
           command: |
             docker build -t $FULL_IMAGE_NAME .
 
@@ -65,16 +65,16 @@ jobs:
       - run:
           name: Test Docker Image
           command: |
-            docker run -d -p 9990:9090 --name built-image usamamali/hello-spring-boot-docker
+            docker run -d -p 7070:9090 --name built-image usamamali/hello-spring-boot-docker
             sleep 15
-            docker run --network container:built-image appropriate/curl --retry 10 --retry-connrefused http://localhost:9990/healthcheck/ | grep "I am alive"
+            docker run --network container:built-image appropriate/curl --retry 10 --retry-connrefused http://localhost:7070/healthcheck/ | grep "I am alive"
 
       - run:
-          name: Test image
+          name: Test AWS image
           command: |
             docker run -d --name built-image1 $FULL_IMAGE_NAME
             sleep 15
-            docker run --network container:built-image1 appropriate/curl --retry 10 --retry-connrefused http://localhost:9099/healthcheck/
+            docker run --network container:built-image1 appropriate/curl --retry 10 --retry-connrefused http://localhost:9090/healthcheck/
 
 
       - save_cache:
