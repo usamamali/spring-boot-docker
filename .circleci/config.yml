@@ -42,11 +42,12 @@ jobs:
 
       - run:
           name: Build App
-          command: ./mvnw -DskipTests package dockerfile:build
+          command: ./mvnw -DskipTests package
 
-      #- run:
-       #   name: Build Docker Image
-        #  command: ./mvnw dockerfile:build
+      - run:
+          name: Build Docker Image
+          command: |
+            docker build
 
       - save_cache:
           paths:
