@@ -34,7 +34,7 @@ jobs:
       - run: mvn dependency:go-offline
 
        # run tests!
-      - run: ./mvnw clean test
+      - run: ./mvnw -e clean test
 
       - run:
           name: Build Docker Image
