@@ -44,9 +44,9 @@ jobs:
 
       - setup_remote_docker
 
-      - run:
-          name: Build Docker Image
-          command: ./mvnw dockerfile:build
+      #- run:
+       #   name: Build Docker Image
+        #  command: ./mvnw dockerfile:build
 
       - save_cache:
           paths:
