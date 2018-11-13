@@ -30,7 +30,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 			<!-- tag::plugin[] -->
-			<!-- <plugin>
+			<plugin>
 				<groupId>com.spotify</groupId>
 				<artifactId>dockerfile-maven-plugin</artifactId>
 				<version>1.3.7</version>
@@ -46,9 +46,9 @@
 				<configuration>
 					<repository>${docker.image.prefix}/${project.artifactId}</repository>
 					<tag>${project.version}</tag>
-					<useMavenSettingsForAuth>true</useMavenSettingsForAuth>
+					<!-- <useMavenSettingsForAuth>true</useMavenSettingsForAuth> -->
 				</configuration>
-			</plugin> -->
+			</plugin>
 
 			<!-- end::plugin[] -->
 

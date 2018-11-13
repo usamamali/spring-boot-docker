@@ -40,7 +40,7 @@ jobs:
 
       - run:
           name: Build App
-          command: ./mvnw package
+          command: ./mvnw package dockerfile:build
 
       - setup_remote_docker
 
