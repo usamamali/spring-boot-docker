@@ -42,7 +42,7 @@ jobs:
 
       - run:
           name: Build App
-          command: ./mvnw -DskipTests clean package dockerfile:build
+          command: ./mvnw -DskipTests package dockerfile:build
 
       #- run:
        #   name: Build Docker Image
