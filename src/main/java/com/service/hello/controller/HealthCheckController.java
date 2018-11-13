@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
  *
  */
 @RestController
-public class HelloRestController {
-    @RequestMapping("/")
-    public String home() {
-	return "Hello Docker World using CI";
+public class HealthCheckController {
+    @RequestMapping("/healthcheck")
+    public String beat() {
+	return "I am alive";
     }
 }

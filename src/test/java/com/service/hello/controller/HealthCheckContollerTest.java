@@ -22,8 +22,8 @@ import org.springframework.test.web.servlet.MockMvc;
  *
  */
 @RunWith(SpringRunner.class)
-@WebMvcTest(HelloRestController.class)
-public class HelloRestContollerTest {
+@WebMvcTest(HealthCheckController.class)
+public class HealthCheckContollerTest {
 
     Logger logger = Logger.getLogger("Test Logger");
 
@@ -31,13 +31,13 @@ public class HelloRestContollerTest {
     private MockMvc mvc;
 
     @Test
-    public void givenHelloService_whenHome_thenReturnWelcomeMsg() throws Exception {
+    public void givenHelloService_whenHealthCheck_thenReturnWelcomeMsg() throws Exception {
 
 	// given(helloRestController.home()).willReturn("Hello Docker World");
 
 	logger.log(Level.INFO, "Inside testing ...");
 
-	mvc.perform(get("/").contentType(MediaType.TEXT_PLAIN)).andExpect(status().isOk());
+	mvc.perform(get("/healthcheck").contentType(MediaType.TEXT_PLAIN)).andExpect(status().isOk());
 
 	// .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
 	// .andExpect();
