@@ -23,8 +23,6 @@ jobs:
       MAVEN_OPTS: -Xmx3200m
     
     steps:
-      - run:
-          name: Test image
       - checkout
 
       # Download and cache dependencies
