@@ -64,3 +64,4 @@ jobs:
             docker tag usamamali/hello-spring-boot-docker $DOCKER_HUB_USER_ID/hello-spring-boot-docker:$CIRCLE_SHA1
             docker tag usamamali/hello-spring-boot-docker $DOCKER_HUB_USER_ID/hello-spring-boot-docker:latest
             docker push usamamali/hello-spring-boot-docker:$CIRCLE_SHA1
+            docker push usamamali/hello-spring-boot-docker:latest
