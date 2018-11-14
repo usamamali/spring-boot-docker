@@ -35,7 +35,7 @@ public class HealthCheckContollerTest {
 
 	// given(helloRestController.home()).willReturn("Hello Docker World");
 
-	logger.log(Level.INFO, "Inside testing ...");
+	logger.log(Level.INFO, "Inside testing .....");
 
 	mvc.perform(get("/healthcheck").contentType(MediaType.TEXT_PLAIN)).andExpect(status().isOk());
 
