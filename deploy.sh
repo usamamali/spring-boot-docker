@@ -16,12 +16,12 @@ deploy_cluster() {
 
     # wait for older revisions to disappear
     # not really necessary, but nice for demos
-    for attempt in {1..30}; do
+    for attempt in {1..90}; do
         if stale=$(aws ecs describe-services --cluster $ECS_CLUSTER_NAME --services $ECS_SERVICE_NAME | \
                        $JQ ".services[0].deployments | .[] | select(.taskDefinition != \"$revision\") | .taskDefinition"); then
             echo "Waiting for stale deployment(s):"
             echo "$stale"
-            sleep 30
+            sleep 10
         else
             echo "Deployed!"
             return 0
@@ -39,7 +39,7 @@ make_task_def(){
 			"essential": true,
 			"portMappings": [
 				{
-					"containerPort": 8080
+					"containerPort": 80
 				}
 			]
 		}
